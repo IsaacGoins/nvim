@@ -85,6 +85,22 @@ return {
           vim.lsp.buf.format({ async = false })
         end
       })
-    end
-  }
+      -- Godot LSP Config
+      local gdscript_config = {
+        capabilities = capabilities,
+        settings = {},
+      }
+      if vim.fn.has 'win32' == 1 then
+        gdscript_config['cmd'] = {'ncat', 'localhost', os.getenv 'GDScript_Port' or '6005' }
+      end
+      require('lspconfig').gdscript.setup(gdscript_config)
+      if vim.fn.filereadable(vim.fn.getcwd() .. '/project.godot') == 1 then
+        local addr = './godot.pope'
+        if vim.fn.has 'win32' == 1 then
+          addr = 'localhost:6004'
+        end
+        vim.fn.serverstart(addr)
+      end
+    end,
+  },
 }
