@@ -95,7 +95,7 @@ return {
       end
       require('lspconfig').gdscript.setup(gdscript_config)
       if vim.fn.filereadable(vim.fn.getcwd() .. '/project.godot') == 1 then
-        local addr = './godot.pope'
+        local addr = './godot.pipe'
         if vim.fn.has 'win32' == 1 then
           addr = 'localhost:6004'
         end
